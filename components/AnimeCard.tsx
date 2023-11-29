@@ -1,3 +1,4 @@
+import { imagePath } from "@/app/lib/utils";
 import Image from "next/image";
 
 export interface AnimeProp {
@@ -22,7 +23,7 @@ function AnimeCard({ anime }: Prop) {
     <div className="max-w-sm rounded relative w-full">
       <div className="relative w-full h-[37vh]">
         <Image
-          src={anime.image.original}
+          src={imagePath(anime.image.original)}
           alt={anime.name}
           fill
           className="rounded-xl"
