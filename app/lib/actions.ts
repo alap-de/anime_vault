@@ -1,17 +1,17 @@
 "use server";
 
+import { BASE_URL } from "@/app/lib/constant";
 import { AnimeProp } from "@/components/AnimeCard";
+
 interface FetchAnimeFilters {
   page: number;
   order?: "popularity" | "ranked";
 }
 const MAX_LIMIT = 8;
-const BASE_URL = "https://shikimori.one";
 export async function fetchAnime({
   page,
   order = "popularity",
 }: FetchAnimeFilters) {
-  console.log("page: ", page);
   try {
     const searchParams = new URLSearchParams();
     searchParams.set("page", page.toString());

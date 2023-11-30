@@ -8,23 +8,30 @@ import AnimeCard, { AnimeProp } from "./AnimeCard";
 
 function LoadMore() {
   const [ref, inView] = useInView();
-  const [animes, setAnimes] = useState<AnimeProp[]>([]);
+  const [animes, setAnimes] = useState<JSX.Element[]>([]);
   const [page, setPage] = useState(2);
   useEffect(() => {
     if (inView) {
       fetchAnime({ page: page }).then((newAnime) => {
-        setAnimes((animes) => [...animes, ...newAnime]);
+        // Building the anime list with each new batch of anime will batch
+        // the anime card animation.
+        console.log(newAnime.length);
+        setAnimes((animes) => [...animes, ...buildAnimeList(newAnime)]);
         setPage((page) => page + 1);
       });
     }
   }, [inView, animes, page]);
 
+  function buildAnimeList(animes: AnimeProp[]): JSX.Element[] {
+    return animes.map((item: AnimeProp, index) => (
+      <AnimeCard key={item.id} anime={item} index={index} />
+    ));
+  }
+
   return (
     <>
       <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
-        {animes.map((item: AnimeProp, index) => (
-          <AnimeCard key={item.id} anime={item} index={index} />
-        ))}
+        {animes}
       </section>
       <section className="flex justify-center items-center w-full">
         <div ref={ref}>
