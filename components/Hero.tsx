@@ -17,7 +17,13 @@ function Hero() {
         </h1>
       </div>
       <div className="lg:flex-1 relative w-full h-[50vh] justify-center">
-        <Image src="/anime.png" alt="anime" fill className="object-contain" />
+        <Image
+          src="/anime.png"
+          alt="anime"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-contain"
+        />
       </div>
     </header>
   );

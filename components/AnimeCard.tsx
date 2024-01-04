@@ -5,13 +5,13 @@ import { MotionDiv } from "@/components/MotionComponents";
 export interface AnimeProp {
   id: string;
   name: string;
-  image: {
-    original: string;
-  };
   kind: string;
   episodes: number;
-  episodes_aired: number;
   score: string;
+  episodesAired: number;
+  poster: {
+    mainUrl: string;
+  };
 }
 
 interface Prop {
@@ -35,9 +35,10 @@ function AnimeCard({ anime, index }: Prop) {
     >
       <div className="relative w-full h-[37vh]">
         <Image
-          src={imagePath(anime.image.original)}
+          src={anime.poster.mainUrl}
           alt={anime.name}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="rounded-xl"
         />
       </div>
@@ -62,7 +63,7 @@ function AnimeCard({ anime, index }: Prop) {
               className="object-contain"
             />
             <p className="text-base text-white font-bold">
-              {anime.episodes || anime.episodes_aired}
+              {anime.episodes || anime.episodesAired}
             </p>
           </div>
           <div className="flex flex-row gap-2 items-center">
