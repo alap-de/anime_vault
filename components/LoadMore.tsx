@@ -15,12 +15,11 @@ function LoadMore() {
       fetchAnime({ page: page }).then((newAnime) => {
         // Building the anime list with each new batch of anime will batch
         // the anime card animation.
-        console.log(newAnime.length);
         setAnimes((animes) => [...animes, ...buildAnimeList(newAnime)]);
         setPage((page) => page + 1);
       });
     }
-  }, [inView, animes, page]);
+  }, [inView]);
 
   function buildAnimeList(animes: AnimeProp[]): JSX.Element[] {
     return animes.map((item: AnimeProp, index) => (
